@@ -1,5 +1,5 @@
 # main.py
-from fastapi import FastAPI
+from fastapi import APIRouter, FastAPI
 
 # Crear la instancia de la aplicacion
 app = FastAPI (
@@ -7,6 +7,8 @@ app = FastAPI (
     description= "REST FAST API - ADSO",
     version= "1.0.0",
 )
+
+api_router=APIRouter()
 
 # Definir un endpoint
 
@@ -26,3 +28,7 @@ def saludar(nombre: str):
         return {"message": f"¡Hola!, {nombre} bienvenida a tu home"}
     else:
         return {"message": f"{nombre}, ¡No tienes acceso!"}
+
+# Conexión de todas las rutas bajo el prefijo /api/v1
+app.include_router(api_router, prefix="/api/v1")
+
