@@ -1,5 +1,11 @@
 # main.py
+from unittest.mock import Base
+from core.database import Base, engine
 from fastapi import APIRouter, FastAPI
+from api.v1.api import api_router 
+
+# Crea las tablas declaradas en los modelos si aun no existen.
+Base.metadata.create_all(bind=engine)
 
 # Crear la instancia de la aplicacion
 app = FastAPI (
@@ -9,6 +15,9 @@ app = FastAPI (
 )
 
 api_router=APIRouter()
+
+# Conexión de todas las rutas bajo el prefijo /api/v1
+app.include_router(api_router, prefix="/api/v1")
 
 # Definir un endpoint
 
@@ -29,6 +38,5 @@ def saludar(nombre: str):
     else:
         return {"message": f"{nombre}, ¡No tienes acceso!"}
 
-# Conexión de todas las rutas bajo el prefijo /api/v1
-app.include_router(api_router, prefix="/api/v1")
+
 
