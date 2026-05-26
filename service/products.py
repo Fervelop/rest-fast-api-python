@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from models.product import Product
 from schemas.product import ProductCreate, ProductUpdate
-from http.client import HTTPException, status
+from fastapi import HTTPException, status
 from models.category import Category
 
 def _validar_categoria(self, categoria_id: int):

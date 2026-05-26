@@ -14,7 +14,6 @@ app = FastAPI (
     version= "1.0.0",
 )
 
-api_router=APIRouter()
 
 # Conexión de todas las rutas bajo el prefijo /api/v1
 app.include_router(api_router, prefix="/api/v1")
