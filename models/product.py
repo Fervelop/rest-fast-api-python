@@ -1,6 +1,7 @@
 # src/models/product.py
-from sqlalchemy import Column, Float, Integer, String
+from sqlalchemy import Column, Float, ForeignKey, Integer, String
 from core.database import Base
+from sqlalchemy.orm import relationship
 
 class Product(Base):
     __tablename__ = "productos"
