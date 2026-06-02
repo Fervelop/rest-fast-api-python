@@ -39,3 +39,9 @@ def saludar(nombre: str):
 
 
 
+# Archivo .env
+# DB_USER=root
+# DB_PASSWORD=
+# DB_HOST=localhost
+# DB_PORT=3306
+# DB_NAME=tienda_db
