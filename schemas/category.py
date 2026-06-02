@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field
 from typing import List, Optional
+from schemas.product import ProductOut
 
 # 1. Esquema Base: Lo que es común a todos
 class CategoryBase(BaseModel):
@@ -25,16 +26,15 @@ class CategoryOut(CategoryBase):
     class Config:
         from_attributes= True
 
-class ProductDeleteResponse(BaseModel):
+class CategoryDeleteResponse(BaseModel):
     message: str
 
-class ProductItemResponse(BaseModel):
+class CategoryItemResponse(BaseModel):
     id: int
     name: str
-    price: float
 
     class Config:
         from_attributes = True
 
-class ProductListResponse(BaseModel):
-    products: List[ProductItemResponse]
+class CategoryListResponse(BaseModel):
+    products: List[CategoryItemResponse]
