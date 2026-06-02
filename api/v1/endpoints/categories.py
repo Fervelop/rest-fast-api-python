@@ -127,51 +127,52 @@ def obtener_categoria(id:int, db: Session = Depends(get_db)):
     }
 
 #Agregar un producto
-@router.post("/", response_model=ProductItemResponse, status_code=status.HTTP_201_CREATED)
-async def crear_producto(new_product: ProductCreate,db: Session = Depends(get_db)):
+@router.post("/", response_model=CategoryItemResponse, status_code=status.HTTP_201_CREATED)
+async def crear_categoria(new_category: CategoryCreate,db: Session = Depends(get_db)):
     """
     Recibe los datos validados por Pydantic y los envía al servicio para persistencia.
     """
-    service = ProductService(db)
-    producto_creado = service.create(new_product)
+    service = CategoryService(db)
+    categoria_creado = service.create(new_category)
     return {
         "success": True,
-        "message": "Producto creado correctamente",
-        "data": producto_creado,
+        "message": "Categoria creado correctamente",
+        "data": categoria_creado,
+  
     }
     
-@router.put("/{id}", response_model=ProductItemResponse)
-async def actualizar_producto(id:int, producto:ProductUpdate,db: Session = Depends(get_db)):
+@router.put("/{id}", response_model=CategoryItemResponse)
+async def actualizar_categoria(id:int, categoria:CategoryUpdate,db: Session = Depends(get_db)):
     """
     Realiza una actualización parcial. Solo se modifican los campos enviados.
     """
-    service = ProductService(db)
-    producto_actualizado = service.update(id, producto)
-    if not producto_actualizado:
+    service = CategoryService(db)
+    categoria_actualizado = service.update(id, categoria)
+    if not categoria_actualizado:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="No se pudo actualizar: Producto no encontrado"
+            detail="No se pudo actualizar: Categoria no encontrado"
         )
     return {
         "success": True,
-        "message": "Producto actualizado correctamente",
-        "data": producto_actualizado,
+        "message": "Categoria actualizado correctamente",
+        "data": categoria_actualizado,
     }
 
-@router.delete("/{producto_id}", response_model=ProductDeleteResponse)
-async def eliminar_producto(producto_id: int, db: Session = Depends(get_db)):
+@router.delete("/{categoria_id}", response_model=CategoryDeleteResponse)
+async def eliminar_categoria(categoria_id: int, db: Session = Depends(get_db)):
     """
     Solicita al servicio la eliminación. Si tiene éxito, retorna 204 (No Content).
     """
-    service = ProductService(db)
-    exito = service.delete(producto_id)
+    service = CategoryService(db)
+    exito = service.delete(categoria_id)
     if not exito:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="No se pudo eliminar: Producto no encontrado"
+            detail="No se pudo eliminar: Categoria no encontrado"
         )
     return {
         "success": True,
-        "message": "Producto eliminado correctamente",
-        "data": {"deleted_id": producto_id},
+        "message": "Categoria eliminado correctamente",
+        "data": {"deleted_id": categoria_id},
     }

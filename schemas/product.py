@@ -30,12 +30,14 @@ class ProductDeleteResponse(BaseModel):
     message: str
 
 class ProductItemResponse(BaseModel):
-    id: int
-    name: str
-    price: float
+    success: bool
+    message: str    
+    data: ProductOut
 
     class Config:
         from_attributes = True
 
 class ProductListResponse(BaseModel):
-    products: List[ProductItemResponse]
+    success: bool
+    message: str    
+    data: List[ProductOut] 
